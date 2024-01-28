@@ -75,7 +75,7 @@ public class Runigram {
 	 * Returns an image which is the vertically flipped version of the given image. 
 	 */
 	public static Color[][] flippedVertically(Color[][] image){
-		//// Replace the following statement with your code
+		Color vertFlip  = new Color(0, 0, 0); 
 		return null;
 	}
 	
@@ -111,8 +111,11 @@ public class Runigram {
 	 * values in the two input color.
 	 */
 	public static Color blend(Color c1, Color c2, double alpha) {
-		//// Replace the following statement with your code
-		return null;
+		int r = (int) (c1.getRed() * alpha + (1 - alpha) * c2.getRed());
+		int g = (int) (c1.getGreen() * alpha + (1 - alpha) * c2.getGreen());
+		int b = (int) (c1.getBlue() * alpha + (1 - alpha) * c2.getBlue());
+		Color C = new Color(r, g, b);
+		return C;
 	}
 	
 	/**
