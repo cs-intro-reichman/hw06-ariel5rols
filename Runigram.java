@@ -83,16 +83,24 @@ public class Runigram {
 	// lum = 0.299 * r + 0.587 * g + 0.114 * b, and returns a Color object consisting
 	// the three values r = lum, g = lum, b = lum.
 	public static Color luminance(Color pixel) {
-		//// Replace the following statement with your code
-		return null;
+		int r = pixel.getRed(), g = pixel.getGreen(), b = pixel.getBlue();
+		int lum = (int) ((0.299 * r) + (0.587 * g) + (0.114 * b));
+		Color grey = new Color(lum, lum, lum);
+		return grey;
 	}
 	
 	/**
 	 * Returns an image which is the grayscaled version of the given image.
 	 */
 	public static Color[][] grayScaled(Color[][] image) {
-		//// Replace the following statement with your code
-		return null;
+		Color[][] original = new Color[image.length][image[0].length];
+		for (int i = 0; i < image.length; i++) {
+			for (int j = 0; j < image[0].length - 1; j++) {
+				original[i][j] = luminance(image[i][j]);
+
+			}
+		}
+		return original;
 	}	
 	
 	/**
@@ -100,8 +108,19 @@ public class Runigram {
 	 * The image is scaled (resized) to have the given width and height.
 	 */
 	public static Color[][] scaled(Color[][] image, int width, int height) {
-		//// Replace the following statement with your code
-		return null;
+		int w2 = image[0].length;
+		int h2 = image.length;
+		double scaledWidth = (double) w2 / width;
+		double scaledHeight = (double) h2 / height;
+		Color[][] scaledImage = new Color[height][width];
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
+				double newHeight = i * scaledHeight;
+				double newWidth = j * scaledWidth;
+				scaledImage[i][j] = image[(int) newHeight][(int) newWidth];
+			}
+		}
+		return scaledImage;
 	}
 	
 	/**
@@ -143,12 +162,12 @@ public class Runigram {
 	 */
 	public static void morph(Color[][] source, Color[][] target, int n) {
 		Color[][] morphedImage = new Color[source[0].length][source.length];
-		Color[][] image2 = new Color[source[0].length][source.length];
+		Color[][] baseImage = new Color[source[0].length][source.length];
 		double alpha = 0;
-		image2 = scaled(target, source[0].length, source.length);
+		baseImage = scaled(target, source[0].length, source.length);
 		for (int i = 0; i < n; i++) {
-			alpha = ((n - i) / n);
-			morphedImage = blend(source, image2, alpha);
+			alpha = (double) ((n - i) / n);
+			morphedImage = blend(source, baseImage, alpha);
 			Runigram.display(morphedImage);
 			StdDraw.pause(100);
 		}
