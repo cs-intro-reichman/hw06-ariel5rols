@@ -42,7 +42,7 @@ public class Runigram {
 		// creates from the 3 colors a new Color object, and 
 		// makes pixel (i,j) refer to that object.
 		//// Replace the following statement with your code.
-		return null;
+		return image;
 	}
 
     // Prints the RGB values of a given color.
@@ -67,16 +67,26 @@ public class Runigram {
 	 * Returns an image which is the horizontally flipped version of the given image. 
 	 */
 	public static Color[][] flippedHorizontally(Color[][] image) {
-		//// Replace the following statement with your code
-		return null;
+		Color[][] hoFlip = new Color[image.length][image[0].length];
+		for (int i = 0; i < image.length; i++) {
+			for (int j = 0; j < image[0].length; j++) {
+				hoFlip[i][j] = image[i][image[0].length - j - 1];
+			}
+		}
+		return hoFlip;
 	}
 	
 	/**
 	 * Returns an image which is the vertically flipped version of the given image. 
 	 */
 	public static Color[][] flippedVertically(Color[][] image){
-		Color vertFlip  = new Color(0, 0, 0); 
-		return null;
+		Color[][] vertFlip = new Color[image.length][image[0].length];
+		for (int i = 0; i < image.length; i++) {
+			for (int j = 0; j < image[0].length; j++) {
+				vertFlip[i][j] = image[image.length - i - 1][j];
+			}
+		}
+		return vertFlip;
 	}
 	
 	// Computes the luminance of the RGB values of the given pixel, using the formula 
@@ -95,7 +105,7 @@ public class Runigram {
 	public static Color[][] grayScaled(Color[][] image) {
 		Color[][] original = new Color[image.length][image[0].length];
 		for (int i = 0; i < image.length; i++) {
-			for (int j = 0; j < image[0].length - 1; j++) {
+			for (int j = 0; j < image[0].length; j++) {
 				original[i][j] = luminance(image[i][j]);
 
 			}
